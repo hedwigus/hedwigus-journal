@@ -12,6 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* Site defaults (hedwigus.com). Override in Appearance > Customize > Analytics & Ads. */
+if ( ! defined( 'HEDWIGUS_DEFAULT_GA_ID' ) ) {
+	define( 'HEDWIGUS_DEFAULT_GA_ID', 'G-XNGGJMYSSB' );
+}
+if ( ! defined( 'HEDWIGUS_DEFAULT_ADSENSE_ID' ) ) {
+	define( 'HEDWIGUS_DEFAULT_ADSENSE_ID', 'ca-pub-8211264289325117' );
+}
+
 /**
  * Whitelist a Google Analytics / GTM ID.
  *
@@ -53,7 +61,7 @@ function hedwigus_integrations_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_setting( 'hedwigus_ga_id', array(
-		'default'           => '',
+		'default'           => HEDWIGUS_DEFAULT_GA_ID,
 		'sanitize_callback' => 'hedwigus_sanitize_analytics_id',
 	) );
 	$wp_customize->add_control( 'hedwigus_ga_id', array(
@@ -64,7 +72,7 @@ function hedwigus_integrations_customize_register( $wp_customize ) {
 	) );
 
 	$wp_customize->add_setting( 'hedwigus_adsense_id', array(
-		'default'           => '',
+		'default'           => HEDWIGUS_DEFAULT_ADSENSE_ID,
 		'sanitize_callback' => 'hedwigus_sanitize_adsense_id',
 	) );
 	$wp_customize->add_control( 'hedwigus_adsense_id', array(
@@ -141,7 +149,7 @@ function hedwigus_output_analytics() {
 		return;
 	}
 
-	$id = hedwigus_sanitize_analytics_id( get_theme_mod( 'hedwigus_ga_id', '' ) );
+	$id = hedwigus_sanitize_analytics_id( get_theme_mod( 'hedwigus_ga_id', HEDWIGUS_DEFAULT_GA_ID ) );
 	if ( '' === $id ) {
 		return;
 	}
@@ -172,7 +180,7 @@ function hedwigus_output_gtm_noscript() {
 		return;
 	}
 
-	$id = hedwigus_sanitize_analytics_id( get_theme_mod( 'hedwigus_ga_id', '' ) );
+	$id = hedwigus_sanitize_analytics_id( get_theme_mod( 'hedwigus_ga_id', HEDWIGUS_DEFAULT_GA_ID ) );
 	if ( 0 !== strpos( $id, 'GTM-' ) ) {
 		return;
 	}
@@ -192,13 +200,13 @@ function hedwigus_output_adsense() {
 		return;
 	}
 
-	$client = hedwigus_sanitize_adsense_id( get_theme_mod( 'hedwigus_adsense_id', '' ) );
+	$client = hedwigus_sanitize_adsense_id( get_theme_mod( 'hedwigus_adsense_id', HEDWIGUS_DEFAULT_ADSENSE_ID ) );
 	if ( '' === $client ) {
 		return;
 	}
 
 	printf(
-		"\n<!-- Google AdSense — Hedwigus Journal -->\n<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%1\$s\" crossorigin=\"anonymous\"></script>\n",
+		"\n<!-- Google AdSense — Hedwigus Journal -->\n<meta name=\"google-adsense-account\" content=\"%1\$s\">\n<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%1\$s\" crossorigin=\"anonymous\"></script>\n",
 		esc_attr( $client )
 	);
 }
@@ -247,7 +255,7 @@ function hedwigus_ad_shortcode( $atts ) {
 
 	$atts = shortcode_atts( array( 'slot' => '' ), $atts, 'hedwigus_ad' );
 
-	$client = hedwigus_sanitize_adsense_id( get_theme_mod( 'hedwigus_adsense_id', '' ) );
+	$client = hedwigus_sanitize_adsense_id( get_theme_mod( 'hedwigus_adsense_id', HEDWIGUS_DEFAULT_ADSENSE_ID ) );
 	$slot   = preg_replace( '/[^0-9]/', '', (string) $atts['slot'] );
 	if ( '' === $slot ) {
 		$slot = preg_replace( '/[^0-9]/', '', (string) get_theme_mod( 'hedwigus_adsense_slot', '' ) );

@@ -40,8 +40,8 @@ readme.txt             WordPress-standard theme readme
 
 Nothing is hardcoded. Open **Appearance → Customize → Analytics & Ads** and set:
 
-- **Google Analytics ID** — GA4 `G-…`, Universal `UA-…-…`, or GTM `GTM-…`
-- **AdSense Publisher ID** — `ca-pub-……`
+- **Google Analytics ID** — (defaults to G-XNGGJMYSSB) GA4 `G-…`, Universal `UA-…-…`, or GTM `GTM-…`
+- **AdSense Publisher ID** — (defaults to ca-pub-8211264289325117) `ca-pub-……`
 - **Default Ad Slot** — used by `[hedwigus_ad]` when no slot is passed
 - **Skip tags for administrators** — on by default, keeps your own visits out
 - **Additional `<head>` tags** — any other verification/meta tag
