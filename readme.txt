@@ -27,6 +27,7 @@ Features:
 * Widget areas: sidebar and three footer columns
 * Translation ready (text domain: hedwigus-journal)
 * Accessible skip link, keyboard focus states and reduced-motion support
+* Analytics/Ads settings in Customizer: GA4/UA/GTM, AdSense, custom head and body tags
 
 == Installation ==
 
@@ -35,6 +36,7 @@ Features:
 3. Go to Appearance > Menus and assign a menu to the Primary and Footer locations.
 4. Go to Appearance > Customize > Hedwigus Journal to set accent color and footer text.
 5. Set featured images on posts; a built-in SVG placeholder is used when absent.
+6. Go to Appearance > Customize > Analytics & Ads to enter your GA/GTM and AdSense IDs. Leave a field blank to disable that tag.
 
 == Frequently Asked Questions ==
 

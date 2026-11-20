@@ -13,6 +13,34 @@ $posts_data = json_decode( file_get_contents( __DIR__ . '/posts.json' ), true );
 $post_index = -1;
 $post_total = count( $posts_data );
 
+/* Demo IDs for verification only — clearly fake, replace in Customizer on a real site. */
+$preview_mods = array(
+	'hedwigus_ga_id'          => 'G-TEST123456',
+	'hedwigus_adsense_id'     => 'ca-pub-0000000000000000',
+	'hedwigus_adsense_slot'   => '0000000000',
+	'hedwigus_exclude_admins' => false,
+	'hedwigus_custom_head'    => '',
+	'hedwigus_custom_body'    => '',
+);
+$hstub_actions = array();
+
+function add_action( $hook, $callback, $priority = 10, $args = 1 ) {
+	global $hstub_actions;
+	$hstub_actions[ $hook ][] = $callback;
+}
+function do_action( $hook ) {
+	global $hstub_actions;
+	foreach ( $hstub_actions[ $hook ] ?? array() as $callback ) {
+		call_user_func( $callback );
+	}
+}
+function add_shortcode( $tag, $callback ) {}
+function shortcode_atts( $pairs, $atts, $shortcode = '' ) { return array_merge( $pairs, $atts ); }
+function is_user_logged_in() { return false; }
+function current_user_can( $capability ) { return false; }
+function wp_json_encode( $data, $flags = 0 ) { return json_encode( $data, $flags ); }
+function wp_kses_post( $html ) { return (string) $html; }
+
 function hstub_post() {
 	global $posts_data, $post_index;
 	return $posts_data[ $post_index ] ?? null;
@@ -31,14 +59,18 @@ function bloginfo( $key ) {
 }
 function language_attributes() { echo 'lang="id"'; }
 function body_class() { echo 'class="home blog"'; }
-function wp_body_open() {}
+function wp_body_open() { do_action( 'wp_body_open' ); }
 function wp_head() {
 	echo '<title>Hedwigus, Me, Family and Fun &ndash; Regular Me</title>' . "\n";
 	echo '<link rel="stylesheet" href="/style.css">' . "\n";
 	echo '<script src="/assets/js/theme.js" defer></script>' . "\n";
+	do_action( 'wp_head' );
 }
 function wp_footer() {}
-function get_theme_mod( $name, $default = '' ) { return $default; }
+function get_theme_mod( $name, $default = '' ) {
+	global $preview_mods;
+	return array_key_exists( $name, $preview_mods ) ? $preview_mods[ $name ] : $default;
+}
 function is_home() { return true; }
 function is_front_page() { return true; }
 function is_paged() { return false; }
@@ -156,5 +188,6 @@ function pings_open() { return false; }
 function get_queried_object() { return null; }
 function is_wp_error( $thing ) { return false; }
 
-/* Load the theme's real template tags into the stub environment. */
+/* Load the theme's real template tags + integrations into the stub environment. */
 require_once dirname( __DIR__ ) . '/inc/template-tags.php';
+require_once dirname( __DIR__ ) . '/inc/integrations.php';

@@ -36,6 +36,21 @@ readme.txt             WordPress-standard theme readme
 - Sidebar + three footer widget areas
 - Translation ready (`hedwigus-journal`), accessible markup, reduced-motion support
 
+## Analytics & ads — all theme parameters
+
+Nothing is hardcoded. Open **Appearance → Customize → Analytics & Ads** and set:
+
+- **Google Analytics ID** — GA4 `G-…`, Universal `UA-…-…`, or GTM `GTM-…`
+- **AdSense Publisher ID** — `ca-pub-……`
+- **Default Ad Slot** — used by `[hedwigus_ad]` when no slot is passed
+- **Skip tags for administrators** — on by default, keeps your own visits out
+- **Additional `<head>` tags** — any other verification/meta tag
+- **Tags after `<body>`** — for tags that must sit right after `<body>`
+
+Leave a field blank and that tag is never printed. Place an ad unit in any post or page with `[hedwigus_ad slot="1234567890"]`.
+
+⚠️ quick vibe-check: there's no cookie-consent UI in this theme — tags load for all non-admin visitors. If you need GDPR/consent gating, add a consent plugin and move the tag output behind its condition.
+
 ## Preview without WordPress
 
 `preview/` contains a small WordPress stub and real post data from hedwigus.com, so the **actual theme templates** can be rendered and verified without a WP install:

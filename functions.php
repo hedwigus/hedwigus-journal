@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/default-menu.php';
+require get_template_directory() . '/inc/integrations.php';
 
 add_action( 'after_setup_theme', 'hedwigus_setup' );
 /**
