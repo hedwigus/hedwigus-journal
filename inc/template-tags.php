@@ -94,3 +94,38 @@ function hedwigus_thumbnail( $size = 'hedwigus-card' ) {
 	}
 	the_post_thumbnail( $size, array( 'loading' => 'lazy' ) );
 }
+
+/**
+ * Number of published posts.
+ *
+ * @return int
+ */
+function hedwigus_post_count() {
+	return (int) wp_count_posts()->publish;
+}
+
+/**
+ * Number of categories that contain at least one post.
+ *
+ * @return int
+ */
+function hedwigus_category_count() {
+	$cats = get_categories( array( 'hide_empty' => true ) );
+	return is_wp_error( $cats ) ? 0 : count( $cats );
+}
+
+/**
+ * Year of the oldest published post, or 0 if there are none.
+ *
+ * @return int
+ */
+function hedwigus_first_post_year() {
+	$posts = get_posts( array(
+		'numberposts'      => 1,
+		'orderby'          => 'date',
+		'order'            => 'ASC',
+		'post_status'      => 'publish',
+		'suppress_filters' => false,
+	) );
+	return empty( $posts ) ? 0 : (int) mysql2date( 'Y', $posts[0]->post_date );
+}

@@ -13,4 +13,17 @@
       $('.footer-grid p').text(next);
     });
   });
+
+  [
+    ['hedwigus_hero_eyebrow', '.hero-eyebrow-text'],
+    ['hedwigus_hero_title', '.hero-title-text'],
+    ['hedwigus_hero_accent', '.hero-accent-text'],
+    ['hedwigus_hero_lead', '.hero .lead']
+  ].forEach(function (pair) {
+    wp.customize(pair[0], function (value) {
+      value.bind(function (next) {
+        $(pair[1]).text(next);
+      });
+    });
+  });
 })(jQuery);

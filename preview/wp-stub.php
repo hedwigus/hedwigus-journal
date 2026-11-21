@@ -155,6 +155,9 @@ function wp_list_categories( $args = array() ) {
 		echo '<li><a href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . esc_html( $cat->name ) . '</a></li>';
 	}
 }
+function get_posts( $args = array() ) { return array( (object) array( 'post_date' => '2013-03-01 00:00:00' ) ); }
+function mysql2date( $f, $d ) { return date( $f, strtotime( $d ) ); }
+function number_format_i18n( $n ) { return number_format( $n, 0, ',', '.' ); }
 function wp_count_posts() { return (object) array( 'publish' => 128 ); }
 function the_posts_pagination( $args = array() ) {
 	echo '<nav class="pagination"><span class="current">1</span><a href="#">2</a><a href="#">3</a><a href="#">&rarr;</a></nav>';

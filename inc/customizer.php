@@ -9,6 +9,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Default hero texts.
+ *
+ * @param string $key Setting id.
+ * @return string
+ */
+function hedwigus_hero_default( $key ) {
+	$defaults = array(
+		'hedwigus_hero_eyebrow' => __( 'Catatan dari Hedwigus', 'hedwigus-journal' ),
+		'hedwigus_hero_title'   => __( 'Teknologi, keluarga,', 'hedwigus-journal' ),
+		'hedwigus_hero_accent'  => __( 'dan segalanya.', 'hedwigus-journal' ),
+		'hedwigus_hero_lead'    => __( 'Cerita sehari-hari tentang AI, olahraga, hobi, dan hal-hal kecil yang bikin hidup lebih menarik. Ditulis pelan-pelan, dibaca santai.', 'hedwigus-journal' ),
+	);
+	return isset( $defaults[ $key ] ) ? $defaults[ $key ] : '';
+}
+
+/**
+ * Get a hero text (Customizer value or default).
+ *
+ * @param string $key Setting id.
+ * @return string
+ */
+function hedwigus_hero_text( $key ) {
+	return get_theme_mod( $key, hedwigus_hero_default( $key ) );
+}
+
 add_action( 'customize_register', 'hedwigus_customize_register' );
 /**
  * Register theme options.
@@ -45,6 +71,25 @@ function hedwigus_customize_register( $wp_customize ) {
 		'type'    => 'checkbox',
 		'section' => 'hedwigus_options',
 	) );
+
+	$hero_fields = array(
+		'hedwigus_hero_eyebrow' => array( __( 'Hero: small label', 'hedwigus-journal' ), 'text' ),
+		'hedwigus_hero_title'   => array( __( 'Hero: headline', 'hedwigus-journal' ), 'text' ),
+		'hedwigus_hero_accent'  => array( __( 'Hero: headline (italic second line)', 'hedwigus-journal' ), 'text' ),
+		'hedwigus_hero_lead'    => array( __( 'Hero: intro paragraph', 'hedwigus-journal' ), 'textarea' ),
+	);
+	foreach ( $hero_fields as $id => $field ) {
+		$wp_customize->add_setting( $id, array(
+			'default'           => hedwigus_hero_default( $id ),
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport'         => 'postMessage',
+		) );
+		$wp_customize->add_control( $id, array(
+			'label'   => $field[0],
+			'type'    => $field[1],
+			'section' => 'hedwigus_options',
+		) );
+	}
 
 	$wp_customize->add_setting( 'hedwigus_footer_text', array(
 		'default'           => __( 'Hedwigus, Me, Family and Fun.', 'hedwigus-journal' ),

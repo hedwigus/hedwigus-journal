@@ -16,14 +16,16 @@ get_header();
 			<section class="hero">
 				<div class="wrap hero-inner">
 					<div>
-						<span class="eyebrow"><span class="dot"></span> <?php esc_html_e( 'Catatan dari Hedwigus', 'hedwigus-journal' ); ?></span>
-						<h1><?php esc_html_e( 'Teknologi, keluarga,', 'hedwigus-journal' ); ?><br><em><?php esc_html_e( 'dan segalanya.', 'hedwigus-journal' ); ?></em></h1>
-						<p class="lead"><?php esc_html_e( 'Cerita sehari-hari tentang AI, olahraga, hobi, dan hal-hal kecil yang bikin hidup lebih menarik. Ditulis pelan-pelan, dibaca santai.', 'hedwigus-journal' ); ?></p>
+						<span class="eyebrow"><span class="dot"></span> <span class="hero-eyebrow-text"><?php echo esc_html( hedwigus_hero_text( 'hedwigus_hero_eyebrow' ) ); ?></span></span>
+						<h1><span class="hero-title-text"><?php echo esc_html( hedwigus_hero_text( 'hedwigus_hero_title' ) ); ?></span><br><em class="hero-accent-text"><?php echo esc_html( hedwigus_hero_text( 'hedwigus_hero_accent' ) ); ?></em></h1>
+						<p class="lead"><?php echo esc_html( hedwigus_hero_text( 'hedwigus_hero_lead' ) ); ?></p>
 						<a class="text-link" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Baca tulisan terbaru', 'hedwigus-journal' ); ?> &rarr;</a>
 						<div class="hero-meta">
-							<span><?php echo esc_html( wp_count_posts()->publish ); ?> <?php esc_html_e( 'artikel', 'hedwigus-journal' ); ?></span>
-							<span><?php echo esc_html( wp_count_posts()->publish ? '8' : '0' ); ?> <?php esc_html_e( 'kategori', 'hedwigus-journal' ); ?></span>
-							<span><?php esc_html_e( 'Sejak 2013', 'hedwigus-journal' ); ?></span>
+							<span><?php echo esc_html( number_format_i18n( hedwigus_post_count() ) ); ?> <?php esc_html_e( 'artikel', 'hedwigus-journal' ); ?></span>
+							<span><?php echo esc_html( number_format_i18n( hedwigus_category_count() ) ); ?> <?php esc_html_e( 'kategori', 'hedwigus-journal' ); ?></span>
+							<?php if ( hedwigus_first_post_year() ) : ?>
+								<span><?php echo esc_html( sprintf( /* translators: %d: year */ __( 'Sejak %d', 'hedwigus-journal' ), hedwigus_first_post_year() ) ); ?></span>
+							<?php endif; ?>
 						</div>
 					</div>
 					<article class="hero-card">
