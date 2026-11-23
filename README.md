@@ -8,6 +8,7 @@ Built from the real content structure of the live blog (Teknologi, Sport, Hobby,
 
 ```
 style.css              Theme header + full design system
+screenshot.png         WordPress theme thumbnail (1200x900)
 functions.php          Setup, menus, widgets, assets
 header.php / footer.php
 index.php              Blog front page with featured hero
