@@ -50,7 +50,7 @@ add_action( 'wp_enqueue_scripts', 'hedwigus_assets' );
  * Styles and scripts. No build step, no jQuery dependency.
  */
 function hedwigus_assets() {
-	wp_enqueue_style( 'hedwigus-style', get_stylesheet_uri(), array(), '1.0.0' );
+	wp_enqueue_style( 'hedwigus-style', get_stylesheet_uri(), array(), '1.0.1' );
 
 	wp_enqueue_script(
 		'hedwigus-theme',

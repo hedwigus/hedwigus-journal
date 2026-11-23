@@ -4,7 +4,7 @@ Contributors: The Hedwig
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,11 @@ Yes. The choice is saved in localStorage. New visitors follow the theme option
 or their operating system preference.
 
 == Changelog ==
+
+= 1.0.1 =
+* Right-align the desktop primary menu
+* Truncate the site title on small screens to prevent header overflow
+* Bump asset version so updated CSS is not served from cache
 
 = 1.0.0 =
 * Initial release.
