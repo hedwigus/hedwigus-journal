@@ -75,15 +75,15 @@ p{margin:0 0 1.4em}
    ============================================================ */
 .site-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 85%,transparent);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.header-inner{min-height:76px;display:flex;align-items:center;gap:28px}
+.header-inner{min-height:76px;display:flex;align-items:center;gap:20px}
 .site-branding{display:flex;align-items:center;gap:11px;flex-shrink:0}
 .site-logo{width:38px;height:38px;border-radius:11px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-family:"Plus Jakarta Sans",sans-serif;font-size:17px;letter-spacing:-.06em}
 html[data-theme="dark"] .site-logo{color:#072019}
 .site-title{font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;font-size:19px;letter-spacing:-.05em;line-height:1.1}
 .site-description{display:block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.02em;line-height:1.3}
 .main-navigation{margin-right:auto}
-.main-navigation ul{list-style:none;margin:0;padding:0;display:flex;gap:26px;flex-wrap:wrap}
-.main-navigation a{font-size:14px;font-weight:600;color:var(--muted)}
+.main-navigation ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;flex-wrap:nowrap}
+.main-navigation a{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap}
 .main-navigation a:hover,.main-navigation .current-menu-item>a{color:var(--ink)}
 .main-navigation .current-menu-item>a{box-shadow:inset 0 -2px 0 var(--accent)}
 .header-tools{display:flex;align-items:center;gap:10px;margin-left:auto}
@@ -241,6 +241,7 @@ html[data-theme="dark"] .btn{color:#072019}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 @media (max-width:980px){
+  .site-description{display:none}
   .hero-inner{grid-template-columns:1fr;gap:40px}
   .with-sidebar{grid-template-columns:1fr;gap:36px}
   .sidebar{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}

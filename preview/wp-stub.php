@@ -90,6 +90,11 @@ function esc_html__( $s, $d = '' ) { return esc_html( $s ); }
 function __( $s, $d = '' ) { return $s; }
 
 function wp_nav_menu( $args = array() ) {
+	/* The preview has no assigned menu, so render the theme's real fallback. */
+	if ( function_exists( 'hedwigus_default_menu' ) ) {
+		hedwigus_default_menu();
+		return;
+	}
 	$items = array( 'Beranda', 'Teknologi', 'Sport', 'Hobby', 'Komunitas', 'Tentang' );
 	echo '<ul id="' . esc_attr( $args['menu_id'] ?? 'menu' ) . '">';
 	foreach ( $items as $i => $label ) {
@@ -194,3 +199,5 @@ function is_wp_error( $thing ) { return false; }
 /* Load the theme's real template tags + integrations into the stub environment. */
 require_once dirname( __DIR__ ) . '/inc/template-tags.php';
 require_once dirname( __DIR__ ) . '/inc/integrations.php';
+require_once dirname( __DIR__ ) . '/inc/customizer.php';
+require_once dirname( __DIR__ ) . '/inc/default-menu.php';
