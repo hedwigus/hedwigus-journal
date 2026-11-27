@@ -4,7 +4,7 @@ Theme URI: https://hedwigus.com
 Author: The Hedwig
 Author URI: https://hedwigus.com
 Description: A modern, minimalist and fast editorial theme for the Hedwigus personal journal. Clean typography, responsive layout, optional dark mode, no build step.
-Version: 1.0.1
+Version: 1.0.2
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 8.0
@@ -177,6 +177,12 @@ html[data-theme="dark"] .search-toggle{color:#072019}
 .entry-content h3{font-size:22px;margin:1.5em 0 .4em}
 .entry-content img{border-radius:12px;margin:1.5em 0}
 .entry-content blockquote{margin:1.8em 0;padding:4px 0 4px 22px;border-left:3px solid var(--accent);color:var(--muted);font-style:italic}
+/* Legacy posts can carry inline white text/background; force readable dark-mode colors. */
+html[data-theme="dark"] .entry-content blockquote{
+  background:var(--surface-2)!important;
+  color:var(--ink)!important;
+  padding:18px 22px;border-radius:12px;
+}
 .entry-content a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .entry-content pre{background:var(--surface-2);border:1px solid var(--line);padding:18px;border-radius:12px;overflow:auto;font-size:14px}
 .entry-content code{background:var(--surface-2);padding:2px 6px;border-radius:5px;font-size:.9em}
