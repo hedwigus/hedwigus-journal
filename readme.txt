@@ -4,7 +4,7 @@ Contributors: The Hedwig
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 8.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,9 @@ Yes. The choice is saved in localStorage. New visitors follow the theme option
 or their operating system preference.
 
 == Changelog ==
+
+= 1.0.4 =
+* Cap the front-page hero image at 210px so source images are not upscaled
 
 = 1.0.3 =
 * Dark-mode article callouts with inline light backgrounds get readable colors
